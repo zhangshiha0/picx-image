@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum UploadStatusEnum {
   // eslint-disable-next-line no-unused-vars
   uploaded = 'uploaded',
@@ -9,22 +8,20 @@ export enum UploadStatusEnum {
 }
 
 export interface UploadedImageModel {
+  type: string
   uuid: string
-  dir: string
-  name: string
-  path: string
   sha: string
-  // eslint-disable-next-line camelcase
-  github_url: string
-  // eslint-disable-next-line camelcase
-  cdn_url: string
-  // eslint-disable-next-line camelcase
-  md_gh_url: string
-  // eslint-disable-next-line camelcase
-  md_cdn_url: string
+  dir: string
+  path: string
+  name: string
+  size: any
   deleting: boolean
-  // eslint-disable-next-line camelcase
   is_transform_md: boolean
+  checked: boolean
+  github_url: string
+  jsdelivr_cdn_url: string
+  staticaly_cdn_url: string
+  cloudflare_cdn_url: string
 }
 
 export interface ToUploadImageModel {
@@ -41,28 +38,30 @@ export interface ToUploadImageModel {
   }
 
   fileInfo: {
-    size: number
-    lastModified: number
+    compressedSize?: number | undefined
+    originSize?: number | undefined
+    size: number | undefined
+    lastModified: number | undefined
   }
 
   filename: {
     name: string
     hash: string
     suffix: string
+    prefixName: string
     now: string
     initName: string
     newName: string
     isHashRename: boolean
     isRename: boolean
+    isPrefix: boolean
   }
 
   externalLink: {
     github: string
-    cdn: string
-    // eslint-disable-next-line camelcase
-    markdown_gh: string
-    // eslint-disable-next-line camelcase
-    markdown_cdn: string
+    jsdelivr: string
+    staticaly: string
+    cloudflare: string
   }
 
   uploadedImg?: UploadedImageModel

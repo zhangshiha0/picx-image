@@ -1,11 +1,11 @@
 <template>
   <main class="main-container" @click="changeUploadAreaActive">
-    <div class="top">
+    <div class="top-container">
       <header-content />
     </div>
 
-    <div class="bottom">
-      <div class="container">
+    <div class="bottom-container">
+      <div class="bottom-content">
         <div class="left">
           <nav-content />
         </div>
@@ -18,30 +18,36 @@
       </div>
     </div>
   </main>
-  <image-viewer></image-viewer>
 </template>
 
 <script lang="ts">
+import { defineComponent, onMounted } from 'vue'
 import headerContent from '@/components/header-content/header-content.vue'
 import navContent from '@/components/nav-content/nav-content.vue'
-import imageViewer from '@/components/image-viewer/image-viewer.vue'
 import { useStore } from '@/store'
-import { defineComponent } from 'vue'
+import userConfigInfoModel from '@/utils/set-theme-mode'
 
 export default defineComponent({
   name: 'main-container',
 
   components: {
     headerContent,
-    navContent,
-    imageViewer
+    navContent
   },
 
   setup() {
     const store = useStore()
+
     const changeUploadAreaActive = (e: any) => {
-      store.commit('CHANGE_UPLOAD_AREA_ACTIVE', e.target.classList.contains('active-upload'))
+      store.commit(
+        'CHANGE_UPLOAD_AREA_ACTIVE',
+        e.target.classList.contains('active-upload')
+      )
     }
+
+    onMounted(() => {
+      userConfigInfoModel()
+    })
 
     return {
       changeUploadAreaActive

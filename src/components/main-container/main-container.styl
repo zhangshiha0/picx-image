@@ -1,36 +1,32 @@
-@import "../../style.styl"
+@import "../../style/base.styl"
 
-$top-height = 60px
-$left-side-width = 80px
+$top-container-height = 60rem
+$left-side-width = 80rem
 
 .main-container {
   position absolute
   box-sizing border-box
   width 100%
   height 100%
-  background $second-background-color
-  padding-top $top-height
+  background var(--second-background-color)
+  font-size 15rem
 
-
-  .top {
-    position absolute
-    top 0
-    left 0
-    box-sizing border-box
-    width 100%
-    height $top-height
-  }
-
-
-  .bottom {
+  .top-container {
     position relative
     box-sizing border-box
     width 100%
-    height 100%
+    height $top-container-height
+  }
+
+
+  .bottom-container {
+    position relative
+    box-sizing border-box
+    width 100%
+    height 'calc(100% - %s)' % $top-container-height
     padding-top $component-interval
 
-
-    .container {
+    .bottom-content {
       position relative
       box-sizing border-box
       width 100%

@@ -5,7 +5,7 @@
       <span class="go-create-repo" @click="goCreateRepo"> GitHub 仓库</span>
     </h3>
     <img
-      src="https://cdn.jsdelivr.net/gh/XPoet/image-hosting@master/PicX/image.j1486dtk68n.png"
+      src="https://cdn.staticaly.com/gh/XPoet/image-hosting@master/PicX/image.j1486dtk68n.png"
       alt="Create GitHub Repository"
     />
   </div>
@@ -21,7 +21,7 @@ function goCreateRepo() {
 
 .tutorials-step-1 {
 
-  width 800px
+  width 800rem
 
   .go-create-repo {
     cursor pointer
@@ -29,7 +29,7 @@ function goCreateRepo() {
 
     &:hover {
       color #085fb8
-      border-bottom 1px solid #085fb8
+      border-bottom 1rem solid #085fb8
     }
   }
 

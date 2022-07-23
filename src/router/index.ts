@@ -3,6 +3,8 @@ import config from '@/views/config/config.vue'
 import upload from '@/views/upload/upload.vue'
 import management from '@/views/management/management.vue'
 import tutorials from '@/views/tutorials/tutorials.vue'
+import settings from '@/views/settings/settings.vue'
+import { store } from '@/store'
 
 const titleSuffix = ` | PicX 图床神器`
 
@@ -53,6 +55,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: `帮助反馈${titleSuffix}`
     }
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: settings,
+    meta: {
+      title: `我的设置${titleSuffix}`
+    }
   }
 ]
 
@@ -63,6 +73,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) (<any>window).document.title = to.meta.title
+  if (from.path === '/management') {
+    store.dispatch('USER_CONFIG_INFO_RESET')
+  }
   next()
 })
 

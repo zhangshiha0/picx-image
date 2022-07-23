@@ -1,4 +1,4 @@
-import { ToUploadImageModel } from '../model/upload.model'
+import { ToUploadImageModel } from '../common/model/upload.model'
 
 export default (): ToUploadImageModel => {
   return {
@@ -23,18 +23,20 @@ export default (): ToUploadImageModel => {
       name: '',
       hash: '',
       suffix: '',
+      prefixName: '',
       now: '',
       initName: '',
       newName: 'xxx',
       isHashRename: true,
-      isRename: false
+      isRename: false,
+      isPrefix: false
     },
 
     externalLink: {
       github: '',
-      cdn: '',
-      markdown_gh: '',
-      markdown_cdn: ''
+      jsdelivr: '',
+      staticaly: '',
+      cloudflare: ''
     }
   }
 }

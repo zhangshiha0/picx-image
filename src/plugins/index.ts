@@ -1,15 +1,24 @@
 import type { Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { ViteEnv } from '@/common/model/viteConfig.model'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ViteEnv } from '@/common/model/vite-config.model'
 
 import configPWAPlugin from './pwa'
-import configStyleImportPlugin from './styleImport'
 
 export default function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (Plugin | Plugin[])[] = [vue()]
 
-  // add plugin vite-plugin-style-import
-  vitePlugins.push(configStyleImportPlugin())
+  // On-demand import style for Element Plus
+  vitePlugins.push(
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
+  )
 
   // production env
   if (isBuild) {

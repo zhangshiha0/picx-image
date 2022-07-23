@@ -1,8 +1,8 @@
-import type { UserConfig, ConfigEnv } from 'vite'
 import { loadEnv } from 'vite'
 import { resolve } from 'path'
+import type { UserConfig, ConfigEnv } from 'vite'
 import createVitePlugins from './src/plugins'
-import wrapperEnv from './src/common/utils/env'
+import wrapperEnv from './src/utils/env'
 
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir)
@@ -26,10 +26,28 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       }
     },
     base: VITE_PUBLIC_PATH, // 设置打包路径
+    optimizeDeps: {
+      exclude: ['@yireen/squoosh-browser']
+    },
     server: {
       port: VITE_PORT,
       open: VITE_OPEN_BROWSER,
       cors: VITE_CORS
+      /**
+       * proxy 设置代理（解决前端跨域问题）
+       * /api -> https://xxx.xxx.com
+       * ^/API -> /
+       * /api/aa/bb -> https://xxx.xxx.com/aa/bb
+       * /api/API/aa/bb -> https://xxx.xxx.com/aa/bb
+       */
+      // proxy: {
+      //   '/api': {
+      //     target: 'https://xxx.xxx.com',
+      //     changeOrigin: true,
+      //     secure: true,
+      //     rewrite: (path) => path.replace('^/API', '/')
+      //   }
+      // }
     }
   }
 }
